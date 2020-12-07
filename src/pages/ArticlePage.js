@@ -1,11 +1,16 @@
 import React from 'react';
 import articleContent from './articleContent';
+import ArticlesList from "../components/ArticlesList";
+
 
 //Campturamos el valor que nos viene en el parámetro de la URL
 const ArticlePage = ({match}) => {
     const name = match.params.name;
     const article = articleContent.find(article => article.name === name);
     if (!article) return <h1>¡El artículo {name} no existe!</h1>
+
+    const otherArticles = articleContent.filter( article => article.name !== name);
+
     return (
     //<> </> Shorthand de <react.Fragment> Poner dentro el contenido </react.Fragment>==> Envolvemos las líneas de código
     // con <> para exportarlo sin tener que usar divs. De normal para exportar varios niveles se tiene que envolver en div
@@ -23,6 +28,8 @@ const ArticlePage = ({match}) => {
             <p key={key}>{paragraph}</p>
             )
         )}
+        <h3>Otros artículos:</h3>
+        <ArticlesList articles={otherArticles} />
     </>
     );
 };

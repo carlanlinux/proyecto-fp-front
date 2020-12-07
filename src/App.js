@@ -6,7 +6,7 @@ import {BrowserRouter as Router,
 import './App.css';
 import HomePage from "./pages/HomePage";
 import AboutPage from "./pages/AboutPage";
-import ArticlesList from "./pages/ArticlesList";
+import ArticlesListPage from "./pages/ArticlesListPage";
 import ArticlePage from "./pages/ArticlePage";
 import NavBar from "./NavBar";
 
@@ -23,7 +23,7 @@ function App() {
       el componente cuando sea esa ruta y si no, que no cargue nada*/}
       <Route path = "/" component={HomePage} exact />
       <Route path= "/about" component={AboutPage} exact />
-      <Route path="/articles-list" component={ArticlesList} exact />
+      <Route path="/articles-list" component={ArticlesListPage} exact />
       {/*Usamos :name donde pasamos un parámetro en el navegador que se pasa al componente*/}
       <Route path="/article/:name" component={ArticlePage} exact />
       </div>
