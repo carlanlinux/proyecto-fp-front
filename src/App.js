@@ -24,7 +24,8 @@ function App() {
       <Route path = "/" component={HomePage} exact />
       <Route path= "/about" component={AboutPage} exact />
       <Route path="/articles-list" component={ArticlesList} exact />
-      <Route path="/article" component={ArticlePage} exact />
+      {/*Usamos :name donde pasamos un parámetro en el navegador que se pasa al componente*/}
+      <Route path="/article/:name" component={ArticlePage} exact />
       </div>
     </div>
       </Router>
