@@ -1,13 +1,14 @@
 import React from 'react';
 import articleContent from './articleContent';
 import ArticlesList from "../components/ArticlesList";
+import NotFoundPage from "./NotFoundPage";
 
 
 //Campturamos el valor que nos viene en el parámetro de la URL
 const ArticlePage = ({match}) => {
     const name = match.params.name;
     const article = articleContent.find(article => article.name === name);
-    if (!article) return <h1>¡El artículo {name} no existe!</h1>
+    if (!article) return <NotFoundPage/>
 
     const otherArticles = articleContent.filter( article => article.name !== name);
 
