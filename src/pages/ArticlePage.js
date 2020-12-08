@@ -3,6 +3,7 @@ import articleContent from './articleContent';
 import ArticlesList from "../components/ArticlesList";
 import NotFoundPage from "./NotFoundPage";
 import CommentsList from "../components/CommentsList";
+import SeccionVotos from "../components/SeccionVotos";
 
 
 //Campturamos el valor que nos viene en el parámetro de la URL
@@ -43,9 +44,9 @@ const ArticlePage = ({match}) => {
     // con <> para exportarlo sin tener que usar divs. De normal para exportar varios niveles se tiene que envolver en div
     <>
         <h1>{article.title}</h1>
+        <SeccionVotos nombreArticulo={name} votos={articleInfo.votos} setInfoArticulo={setARticleInfo}/>
+        <CommentsList comentarios={articleInfo.comentarios}/>
 
-        {/*Mostramos los datos del artículo*/}
-        <p>Este artículo ha recibiddo {articleInfo.votos} votos</p>
 {/*       Cada párrafo del artículo es una posición del array que contiene el artículo completo. Para sacar los paárrafos hacemos un map.
         we're going to want to map our article's content property, which is a bunch of strings representing paragraphs,
         to a bunch of JSX elements. And that'll look like this. .map(paragraph, and we'll put two paragraph tags and put
