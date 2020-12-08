@@ -21,7 +21,16 @@ const ArticlePage = ({match}) => {
     // dentro de ese array, en este caso nos interesa la url, que es la const name que hemos sacado de los parámetros de la URL
     //Usamos setArticleInfo y le indicamos los valores.
     useEffect(() => {
-        setARticleInfo({votos: Math.ceil(Math.random()*10)});
+        //Creamos una función para traernos los datos ya que use effect no podemos hacerla async
+        const fetchData = async () => {
+            //Nos traemos los datos llamando a la api y guardamos la respuesta
+            const result  = await fetch(`/api/articles/${name}`);
+            //Como la respuesta incluye cosas como el código de respuesta y sólo queremos el cuerpo, la guardamos en un json
+            const responseBody = await result.json();
+            setARticleInfo(responseBody);
+        }
+        //Llamamos a la función que hemos creado
+        fetchData();
     }, [name]);
 
     if (!article) return <NotFoundPage/>
