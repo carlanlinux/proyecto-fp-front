@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import articleContent from './articleContent';
 import ArticlesList from "../components/ArticlesList";
 import NotFoundPage from "./NotFoundPage";
+import CommentsList from "../components/CommentsList";
 
 
 //Campturamos el valor que nos viene en el parámetro de la URL
@@ -56,6 +57,9 @@ const ArticlePage = ({match}) => {
             <p key={key}>{paragraph}</p>
             )
         )}
+
+    {/*Cargamos el componente de los comentarios pasando como argumento los comentarios sacados de la info del artículo que hemos cogido de la bd*/}
+        <CommentsList comentarios={articleInfo.comentarios}/>
         <h3>Otros artículos:</h3>
         <ArticlesList articles={otherArticles} />
     </>
