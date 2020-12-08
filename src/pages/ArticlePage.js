@@ -4,6 +4,7 @@ import ArticlesList from "../components/ArticlesList";
 import NotFoundPage from "./NotFoundPage";
 import CommentsList from "../components/CommentsList";
 import SeccionVotos from "../components/SeccionVotos";
+import AddComentarioForm from "../components/AddComentarioForm";
 
 
 //Campturamos el valor que nos viene en el parámetro de la URL
@@ -14,7 +15,7 @@ const ArticlePage = ({match}) => {
     //Usamos React Hooks. Definimos la información del articúlo, que va a coger la información del servidor.
     // SetArcileinfo es la información con la que vamos a poblar la info del partículo y el objeto vacío que pasamos como argumento es el valor inicial de esa articleinfo antes de cargar algún dato que cambie su estado.
     //Se puede poner un valor por defecto de las propiedades que esperamos recibir en el article info
-    const [articleInfo, setARticleInfo] = useState({ votos: 0, comentarios: []});
+    const [articleInfo, setArticleInfo] = useState({ votos: 0, comentarios: []});
 
     //Añadimos los datos redicibidos por la llamada al back usando use effect, pasando params en blanco para que se pase como argumento cualquier cosa que nos llegue.
     //Useeffect se llama continuamente cada vez que el componente se actualiza y se llama en bucle infinito si se está actualizando continuamente, para eso hay que usar sus deps usando un array
@@ -29,7 +30,7 @@ const ArticlePage = ({match}) => {
             const result  = await fetch(`/api/articles/${name}`);
             //Como la respuesta incluye cosas como el código de respuesta y sólo queremos el cuerpo, la guardamos en un json
             const responseBody = await result.json();
-            setARticleInfo(responseBody);
+            setArticleInfo(responseBody);
         }
         //Llamamos a la función que hemos creado
         fetchData();
@@ -44,8 +45,7 @@ const ArticlePage = ({match}) => {
     // con <> para exportarlo sin tener que usar divs. De normal para exportar varios niveles se tiene que envolver en div
     <>
         <h1>{article.title}</h1>
-        <SeccionVotos nombreArticulo={name} votos={articleInfo.votos} setInfoArticulo={setARticleInfo}/>
-        <CommentsList comentarios={articleInfo.comentarios}/>
+        <SeccionVotos nombreArticulo={name} votos={articleInfo.votos} setInfoArticulo={setArticleInfo}/>
 
 {/*       Cada párrafo del artículo es una posición del array que contiene el artículo completo. Para sacar los paárrafos hacemos un map.
         we're going to want to map our article's content property, which is a bunch of strings representing paragraphs,
@@ -61,6 +61,7 @@ const ArticlePage = ({match}) => {
 
     {/*Cargamos el componente de los comentarios pasando como argumento los comentarios sacados de la info del artículo que hemos cogido de la bd*/}
         <CommentsList comentarios={articleInfo.comentarios}/>
+        <AddComentarioForm nombreArticulo={name} setInfoArticulo={setArticleInfo} />
         <h3>Otros artículos:</h3>
         <ArticlesList articles={otherArticles} />
     </>
