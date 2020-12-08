@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import articleContent from './articleContent';
 import ArticlesList from "../components/ArticlesList";
 import NotFoundPage from "./NotFoundPage";
@@ -8,6 +8,22 @@ import NotFoundPage from "./NotFoundPage";
 const ArticlePage = ({match}) => {
     const name = match.params.name;
     const article = articleContent.find(article => article.name === name);
+
+    //Usamos React Hooks. Definimos la información del articúlo, que va a coger la información del servidor.
+    // SetArcileinfo es la información con la que vamos a poblar la info del partículo y el objeto vacío que pasamos como argumento es el valor inicial de esa articleinfo antes de cargar algún dato que cambie su estado.
+    //Se puede poner un valor por defecto de las propiedades que esperamos recibir en el article info
+    const [articleInfo, setARticleInfo] = useState({ votos: 0, comentarios: []});
+
+    //Añadimos los datos redicibidos por la llamada al back usando use effect, pasando params en blanco para que se pase como argumento cualquier cosa que nos llegue.
+    //Useeffect se llama continuamente cada vez que el componente se actualiza y se llama en bucle infinito si se está actualizando continuamente, para eso hay que usar sus deps usando un array
+    //Si el array es vacío sólo se carga cuando se carga el componente, sólo la primera vez cuando se carga el componente,
+    // en este caso artículos. Para especificar que se cargue cada vez que cambie algo, tenemos que indicar en qué fijarse
+    // dentro de ese array, en este caso nos interesa la url, que es la const name que hemos sacado de los parámetros de la URL
+    //Usamos setArticleInfo y le indicamos los valores.
+    useEffect(() => {
+        setARticleInfo({votos: Math.ceil(Math.random()*10)});
+    }, [name]);
+
     if (!article) return <NotFoundPage/>
 
     const otherArticles = articleContent.filter( article => article.name !== name);
@@ -18,6 +34,8 @@ const ArticlePage = ({match}) => {
     <>
         <h1>{article.title}</h1>
 
+        {/*Mostramos los datos del artículo*/}
+        <p>Este artículo ha recibiddo {articleInfo.votos} votos</p>
 {/*       Cada párrafo del artículo es una posición del array que contiene el artículo completo. Para sacar los paárrafos hacemos un map.
         we're going to want to map our article's content property, which is a bunch of strings representing paragraphs,
         to a bunch of JSX elements. And that'll look like this. .map(paragraph, and we'll put two paragraph tags and put
