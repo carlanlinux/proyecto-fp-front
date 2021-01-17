@@ -4,7 +4,10 @@ const AddComentarioForm = ({nombreArticulo, setInfoArticulo}) => {
     const [username, setUsername] = useState('');
     const [commentText, setCommentText] = useState('');
 
+    //Función para añadir un comentario
     const addComment = async () => {
+        //Lllamamos a la API por post y se le dice que el cuerpo es un JSON donde se pase
+        // el nombre de uusuario y el texto del comentario y se le indican las cabeceeras.
         const result = await fetch(`/api/articles/${nombreArticulo}/comentar`, {
             method: 'post',
             body: JSON.stringify({username, text: commentText}),
@@ -13,8 +16,10 @@ const AddComentarioForm = ({nombreArticulo, setInfoArticulo}) => {
             }
         });
 
+        //El cuerpo es el resultado pasado a json.
         const body = await result.json();
         setInfoArticulo(body);
+        //Se dejan en blanco nuevamente los campos del formulario
         setUsername('');
         setCommentText('');
     }

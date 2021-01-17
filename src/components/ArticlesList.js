@@ -1,7 +1,7 @@
 import React from 'react';
 import {Link} from "react-router-dom";
 
-//Nos traemos como parámetro la lista de artículos que nos manda desde la página de article list.
+//Nos traemos como parámetro la lista de artículos que nos manda desde la página de article listPage.
 const ArticlesList = ({articles}) => (
 
 <>
