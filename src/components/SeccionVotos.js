@@ -6,7 +6,7 @@ const SeccionVotos = ({nombreArticulo, votos, setInfoArticulo}) => {
 
     //Hacemos una llamada post para incrementar el número de me votos de cada artículo cogiendo el nombre del artículo
  const votarArticulo = async () => {
-     const result = await fetch(`/api/articles/${nombreArticulo}/votar`, {
+     const result = await fetch(`/api/articulos/${nombreArticulo}/votar`, {
          method: 'post',
      })
      //Cogemos el cuerpo de la respuesta pasado a JSON
