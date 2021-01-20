@@ -18,7 +18,7 @@ const CommentsList = ({nombre}) => {
                 }
                 //Llamamos a la función que hemos creado
                 fetchDataArticulo();
-        }, [nombre]);
+        }, );
 
         return (
 
