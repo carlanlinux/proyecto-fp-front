@@ -4,7 +4,7 @@ import React, {useEffect, useState} from 'react'
 // pintamos con el nombre de usuario y el texto del comentario
 const CommentsList = ({nombre}) => {
 
-        const [articulo, setArticulo] = useState({ });
+        const [articulo, setArticulo] = useState({"comentarios": []});
 
 
         useEffect(() => {
@@ -20,16 +20,17 @@ const CommentsList = ({nombre}) => {
                 fetchDataArticulo();
         }, [nombre]);
 
-        let comen = [];
-        comen.push(articulo.comentarios);
-
-
         return (
 
-<>
-<p>{articulo.nombre}</p>
+            <>
+                    {articulo.comentarios.map((comentario, key) => (
+                        <div className={"comment"} key={key}>
+                                <h4>{comentario.usuario}</h4>
+                                <p>{comentario.comentario}</p>
+                        </div>
 
-</>
+                    ))}
+            </>
         );
 };
 

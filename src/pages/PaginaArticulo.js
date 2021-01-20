@@ -1,7 +1,7 @@
-import React, {useState, useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import NotFoundPage from "./NotFoundPage";
 import SeccionVotos from "../components/SeccionVotos";
-import RelatedArticlesListPage from "./RelatedArticlesListPage";
+import RelatedArticlesListPage from "../components/RelatedArticlesListPage";
 import CommentsList from "../components/CommentsList";
 import AddComentarioForm from "../components/AddComentarioForm";
 

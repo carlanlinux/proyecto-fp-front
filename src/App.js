@@ -1,18 +1,11 @@
-
-import logo from './logo.svg';
 //Importamos router para traernos las dependencias de la navegación
-import {BrowserRouter as Router,
-        Route,
-    Switch
-} from 'react-router-dom';
+import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import './App.css';
 import HomePage from "./pages/HomePage";
 import AboutPage from "./pages/AboutPage";
 import ArticlesListPage from "./pages/ArticlesListPage";
-import ArticlePage from "./pages/ArticlePage";
 import NavBar from "./NavBar";
 import NotFoundPage from "./pages/NotFoundPage";
-import {useEffect, useState} from "react";
 import PaginaArticulo from "./pages/PaginaArticulo";
 
 function App() {

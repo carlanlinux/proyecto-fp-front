@@ -1,9 +1,8 @@
 import React, {useEffect, useState} from 'react';
-import ArticlesList from "../components/ArticlesList";
+import ArticlesList from "./ArticlesList";
 
 
-
-const RelatedArticlesListPage = ({nombre}) =>  {
+const RelatedArticlesListPage = ({nombre}) => {
 
 //Usamos React Hooks. Definimos la información del articúlo, que va a coger la información del servidor.
 // SetArcileinfo es la información con la que vamos a poblar la info del partículo y el objeto vacío que pasamos como argumento es el valor inicial de esa articleinfo antes de cargar algún dato que cambie su estado.
@@ -20,7 +19,7 @@ const RelatedArticlesListPage = ({nombre}) =>  {
         //Creamos una función para traernos los datos ya que use effect no podemos hacerla async
         const fetchData = async () => {
             //Nos traemos los datos llamando a la api y guardamos la respuesta
-            const result  = await fetch(`/api/obtenerArticulos`);
+            const result = await fetch(`/api/obtenerArticulos`);
             //Como la respuesta incluye cosas como el código de respuesta y sólo queremos el cuerpo, la guardamos en un json
             const responseBody = await result.json();
             setTodosArticulos(responseBody);
@@ -30,7 +29,7 @@ const RelatedArticlesListPage = ({nombre}) =>  {
         fetchData();
     }, []);
 
-    const articulosRelacionados = (todosArticulos.filter( article => article.nombre !== nombre));
+    const articulosRelacionados = (todosArticulos.filter(article => article.nombre !== nombre));
 
 
     return (
