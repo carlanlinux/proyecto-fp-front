@@ -1,3 +1,4 @@
+
 import logo from './logo.svg';
 //Importamos router para traernos las dependencias de la navegación
 import {BrowserRouter as Router,
@@ -11,8 +12,12 @@ import ArticlesListPage from "./pages/ArticlesListPage";
 import ArticlePage from "./pages/ArticlePage";
 import NavBar from "./NavBar";
 import NotFoundPage from "./pages/NotFoundPage";
+import {useEffect, useState} from "react";
 
 function App() {
+
+
+
   return (
       //Envolvemos el código dentro del router component
       //Article:name --> Aquí recogemos el parámetro de la URL para poderlo utilizar en la página en cuestión
@@ -28,9 +33,12 @@ function App() {
       el componente cuando sea esa ruta y si no, que no cargue nada. */}
       <Route path = "/" component={HomePage} exact/>
       <Route path= "/about" component={AboutPage} exact/>
-      <Route path="/articles-list" component={ArticlesListPage} exact />
+      <Route
+          path="/articles-list"
+          component={ArticlesListPage}
+          exact />
       {/*Usamos :name donde pasamos un parámetro en el navegador que se pasa al componente*/}
-      <Route path="/article/:name" component={ArticlePage}  />
+      <Route path="/articulo/:nombre" component={ArticlePage}  />
       <Route component={NotFoundPage}/>
      </Switch>
       </div>
