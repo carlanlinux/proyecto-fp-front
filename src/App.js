@@ -13,6 +13,7 @@ import ArticlePage from "./pages/ArticlePage";
 import NavBar from "./NavBar";
 import NotFoundPage from "./pages/NotFoundPage";
 import {useEffect, useState} from "react";
+import PaginaArticulo from "./pages/PaginaArticulo";
 
 function App() {
 
@@ -38,7 +39,7 @@ function App() {
           component={ArticlesListPage}
           exact />
       {/*Usamos :name donde pasamos un parámetro en el navegador que se pasa al componente*/}
-      <Route path="/articulo/:nombre" component={ArticlePage}  />
+      <Route path="/articulo/:nombre" component={PaginaArticulo}  />
       <Route component={NotFoundPage}/>
      </Switch>
       </div>

@@ -1,10 +1,7 @@
 import React, {useState, useEffect} from 'react';
-import articleContent from './articleContent';
 import ArticlesList from "../components/ArticlesList";
 import NotFoundPage from "./NotFoundPage";
-import CommentsList from "../components/CommentsList";
 import SeccionVotos from "../components/SeccionVotos";
-import AddComentarioForm from "../components/AddComentarioForm";
 
 
 //Campturamos el valor que nos viene en el parámetro de la URL
@@ -17,7 +14,6 @@ const ArticlePage = ({match}) => {
     //Se puede poner un valor por defecto de las propiedades que esperamos recibir en el article info
     const [articulo, setArticulo] = useState({ });
     const [todosArticulos, setTodosArticulos] = useState([]);
-    const [articulosRelacionados, setarticulosRelacionados] = useState([]);
 
 
 
@@ -50,7 +46,6 @@ const ArticlePage = ({match}) => {
         //Llamamos a la función que hemos creado
         fetchDataArticulo();
         fetchDataTodosArticulos();
-        setarticulosRelacionados(todosArticulos.filter( article => article.nombre !== nombre));
 
     }, [nombre]);
 
@@ -58,6 +53,8 @@ const ArticlePage = ({match}) => {
     console.log(todosArticulos);
     //*** SACAMOS EL RESTO DE ARTÍCULOS PARA MOSTRARLOS ABAJO  ***/
 
+    let articulosRelacionados = [];
+    articulosRelacionados=(todosArticulos.filter( article => article.nombre !== nombre));
 
 
 
@@ -66,9 +63,6 @@ const ArticlePage = ({match}) => {
 
     //Hacemos un filtro en el array para comprobar que existe ese artículo
 
-    console.log(articulosRelacionados);
-
-    const hostias = articulo.comentarios;
 
 
     return (
@@ -91,6 +85,6 @@ const ArticlePage = ({match}) => {
         */}
     </>
     );
-};
+}
 
 export default ArticlePage;
