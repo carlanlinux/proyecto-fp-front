@@ -1,12 +1,24 @@
 import React, {useState} from 'react';
 import AdminPage from "../pages/AdminPage";
+import SignUp from "../components/SignUp";
+import PropTypes from 'prop-types';
+import 'bootstrap';
 
 const Login = () => {
+
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    //Guardamos el token de sesión en la memoria
+    const [tokenSesion, setTokenSesion] = useState();
+
+    //Si no hay token cargamos el toquen de iniciar sesión
+ if (tokenSesion) {
+            return <AdminPage/>
+        }
 
     //Función para añadir un comentario
-    const login = async () => {
+    const login = async e => {
+        e.preventDefault();
         //Lllamamos a la API por post y se le dice que el cuerpo es un JSON donde se pase
         // el nombre de uusuario y el texto del comentario y se le indican las cabeceeras.
         const result = await fetch(`/api/login`, {
@@ -17,56 +29,29 @@ const Login = () => {
             }
         });
 
-        if (result.status === 200) return (
-          <>
-              {console.log(result.status)}
-              <AdminPage/>
-          </>
-        );
-
+        if (result.status === 200) setTokenSesion(result);
 
     }
+
+
+
     return (
-        <div id={"add-comment-form"}>
-            <form>
-                <h3>Sign In</h3>
-
-                <div className="form-group">
-                    <label>Email address</label>
-                    <input type="email" className="form-control" placeholder="Enter email" />
-                </div>
-
-                <div className="form-group">
-                    <label>Password</label>
-                    <input type="password" className="form-control" placeholder="Enter password" />
-                </div>
-
-                <div className="form-group">
-                    <div className="custom-control custom-checkbox">
-                        <input type="checkbox" className="custom-control-input" id="customCheck1" />
-                        <label className="custom-control-label" htmlFor="customCheck1">Remember me</label>
-                    </div>
-                </div>
-
-                <button type="submit" className="btn btn-primary btn-block">Submit</button>
-                <p className="forgot-password text-right">
-                    Forgot <a href="#">password?</a>
-                </p>
-            </form>
-
+        <div id={"add-comment-form"} className={"login-wrapper"}>
+            <form onSubmit={login}>
             <h3>Login</h3>
-            <label>
+            <label htmlFor={email}>
                 Nombre:
-                <input type={"text"} value={email} onChange={(event => setEmail(event.target.value))}/>
+                <input id={email} type={"text"} value={email} placeholder={"Introducir email"}
+                       onChange={(event => setEmail(event.target.value))}/>
             </label>
-            <label>
+            <label htmlFor={password}>
                 Contraseña:
-                <input rows={"4"} cols={"50"} value={password} type={"password"}
+                <input id={password} rows={"4"} cols={"50"} value={password} type={"password"} placeholder={"Introducir contraseña"}
                        onChange={(event => setPassword(event.target.value))}/>
             </label>
-            <button onClick={() => login()}>Enviar comentario</button>
+            <button type={"submit"}>Iniciar sesión</button>
+            </form>
         </div>
-
     );
 }
 export default Login;
