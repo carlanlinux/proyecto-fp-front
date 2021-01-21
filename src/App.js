@@ -7,6 +7,7 @@ import ArticlesListPage from "./pages/ArticlesListPage";
 import NavBar from "./NavBar";
 import NotFoundPage from "./pages/NotFoundPage";
 import PaginaArticulo from "./pages/PaginaArticulo";
+import Login from "./components/Login";
 
 function App() {
 
@@ -33,6 +34,7 @@ function App() {
           exact />
       {/*Usamos :name donde pasamos un parámetro en el navegador que se pasa al componente*/}
       <Route path="/articulo/:nombre" component={PaginaArticulo}  />
+         <Route path="/login" component={Login}  />
       <Route component={NotFoundPage}/>
      </Switch>
       </div>
