@@ -9,12 +9,32 @@ import NotFoundPage from "./pages/NotFoundPage";
 import PaginaArticulo from "./pages/PaginaArticulo";
 import Login from "./components/Login";
 import 'bootstrap';
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import Users from "./components/Users";
 
+
 function App() {
+    //Creamos una constante para el token y el set token que nos comprueba si la sesión está abierta
+    const [tokenSesion, setTokenSesion] = useState(null);
 
+    //Monitorizamos cada vez que el toquen de la sesión cambie y lo cogemos de la sesión del navegador de session storage
+    useEffect(() => {
+        const getToken = () => {
+            if (sessionStorage.getItem('token')) {
+                const tokenString = sessionStorage.getItem('token');
+                setTokenSesion(tokenString);
+            }
+        };
+        getToken();
+        console.log("Usuario logado" + tokenSesion);
+    },[tokenSesion]);
 
+    //Función para cerrar la sesión desde el session storage del navegador y poner el token de la sesión a null.
+    // Esta función la pasamos a la navBar
+    const cerrarSesion = () => {
+        sessionStorage.clear();
+        setTokenSesion(null);
+    };
 
   return (
       //Envolvemos el código dentro del router component
@@ -22,7 +42,7 @@ function App() {
       <Router>
     <div className="App">
       {/*Cargamos el componente de la barra de navegación encima del cuerpo de la página ya que queremos que se cargue en todas las páginas*/}
-      <NavBar/>
+      <NavBar tokenSesion={tokenSesion} cerrarSesion={cerrarSesion}/>
       <div id="page-body">
 
     {/*Usamos Switch para decirle que una vez encuentre uno de los path no siga mostrando los siguientes. Aquí es importante el orden.*/}
@@ -37,8 +57,10 @@ function App() {
           exact />
       {/*Usamos :name donde pasamos un parámetro en el navegador que se pasa al componente*/}
       <Route path="/articulo/:nombre" component={PaginaArticulo}  />
-         <Route path="/admin" component={Login}  />
-         <Route path= "/users" component={Users} exact/>
+{/*      Pasamos como componente la función de set token para que nos vuelva a la App el token en cuanto iniciemos sesión. De esta forma capturamos el estado de la sesión
+      lo pasamos a la barra de navegación como props en el caso que no estuviera el usuario logado.    */}
+         <Route path="/admin" component={() => <Login setTokenSesion={setTokenSesion}/>}/>
+         <Route path="/Users" component={() => <Users tokenSesion={tokenSesion}/>}/>
       <Route component={NotFoundPage}/>
      </Switch>
       </div>

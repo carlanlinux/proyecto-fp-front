@@ -2,8 +2,8 @@ import React, {useState} from 'react';
 import AdminPage from "../pages/AdminPage";
 import 'bootstrap';
 
-
-const Login = () => {
+//Recogemos en propiedades la función setToken
+const Login = (props) => {
 
 
     //Guardamos en los estados el email y la contraseña junto con el token que vamos a utilizar para comprobar la sesión
@@ -50,9 +50,12 @@ const Login = () => {
         );
         const cuerpoRespuesta = await result.json();
 
+        //Si el login es correcto que recibimos un status 200 ponemos el token y lo pasamos a la app por propiedades para
+        // que modifique la barra de navegación
         if (result.status === 200) {
             console.log("Token:" + cuerpoRespuesta);
            setToken(cuerpoRespuesta);
+           props.setTokenSesion();
         }
 
     };

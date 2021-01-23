@@ -1,12 +1,15 @@
 import React, {useState} from 'react';
 import UsersList from "./UsersList";
+import NotFoundPage from "../pages/NotFoundPage";
 
 
-const AddComentarioForm = () => {
+
+const Users = (props) => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [email, setEmail] = useState('');
     const [usuarioExito, setUsuarioExito] = useState('');
+
 
     //Función para añadir un comentario
     const addUsuario = async () => {
@@ -31,6 +34,7 @@ const AddComentarioForm = () => {
         }
 
     }
+    if (props.tokenSesion) {
 
     return (
         <>
@@ -56,6 +60,10 @@ const AddComentarioForm = () => {
                 <UsersList/>
             </>
     );
+    } else {
+        return <NotFoundPage/>
+    }
+
 }
 
-export default AddComentarioForm;
+export default Users;

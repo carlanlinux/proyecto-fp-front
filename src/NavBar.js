@@ -1,40 +1,11 @@
 import React from 'react';
 //Importamos link para hacer los links en vez de con la etiqueta anchor de HTML
 import {Link} from "react-router-dom";
-import {useState, useEffect} from 'react';
-import { Redirect } from "react-router-dom";
 
 
-const NavBar = () => {
+const NavBar = (props) => {
 
-    //Recuperamos los datos del token de sesión para pintarlo en el menú superior
-    const [usuario, setUsuario] = useState('Login');
-    const [tokenSesion, setTokenSesion] = useState();
-
-    const getToken = () => {
-        if (sessionStorage.getItem('token')) {
-            const tokenString = sessionStorage.getItem('token');
-            setTokenSesion(tokenString);
-            setUsuario(tokenString);
-        }
-    };
-
-    const cerrarSesiion = () => {
-        sessionStorage.clear();
-        setTokenSesion(null);
-    }
-
-
-    //Si no tenemos token sesión, llamamos a la función de obtener token
-
-    useEffect(() => {
-        if (!tokenSesion) getToken();
-        console.log(tokenSesion);
-
-    },)
-
-    if (tokenSesion) {
-        console.log("Entro al return de usuario")
+    if (props.tokenSesion){
         return (
             <nav>
                 <ul>
@@ -48,17 +19,26 @@ const NavBar = () => {
                         <Link to="/articles-list">Entradas del blog</Link>
                     </li>
                     <li>
-                        <Link to="/admin">Bienvenido, {usuario}</Link>
+                        <Link to="/Users">Gestión Usuarios</Link>
                     </li>
                     <li>
-
-                        <button id={"cerrarSession"} onClick={() => cerrarSesiion() }>Cerrar Sesion </button>
+                        <Link to="/articles-list">Nuevo post</Link>
+                    </li>
+                    <li>
+                        <Link to="/articles-list">Entradas del blog</Link>
+                    </li>
+                    <li>
+                        Bienvenid@, {props.tokenSesion}
+                    </li>
+                    <li>
+                        <button onClick={(e) => props.cerrarSesion()}>Cerrar Sesión</button>
                     </li>
 
                 </ul>
             </nav>
         );
     } else {
+
         return (
             <nav>
                 <ul>
@@ -71,16 +51,17 @@ const NavBar = () => {
                     <li>
                         <Link to="/articles-list">Entradas del blog</Link>
                     </li>
-                    <li>
+              {/*      <li>
                         <Link to="/admin">Login</Link>
-                    </li>
+                    </li>*/}
 
                 </ul>
             </nav>
         );
-    }
 
     }
+
+}
 
 
 export default NavBar;

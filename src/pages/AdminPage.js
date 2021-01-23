@@ -1,12 +1,11 @@
 import React from 'react';
 
 
+
 const AdminPage = () => (
     <>
-        <h1>Sobre mi</h1>
-        <p>Texto</p>
-        <p>Texto</p>
-        <p>Texto</p>
+        <h1>Pagina de administracion</h1>
+
     </>
 );
 
