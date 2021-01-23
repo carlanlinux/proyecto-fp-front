@@ -10,6 +10,7 @@ import PaginaArticulo from "./pages/PaginaArticulo";
 import Login from "./components/Login";
 import 'bootstrap';
 import React, {useState} from "react";
+import Users from "./components/Users";
 
 function App() {
 
@@ -37,6 +38,7 @@ function App() {
       {/*Usamos :name donde pasamos un parámetro en el navegador que se pasa al componente*/}
       <Route path="/articulo/:nombre" component={PaginaArticulo}  />
          <Route path="/admin" component={Login}  />
+         <Route path= "/users" component={Users} exact/>
       <Route component={NotFoundPage}/>
      </Switch>
       </div>

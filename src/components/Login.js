@@ -1,20 +1,39 @@
 import React, {useState} from 'react';
 import AdminPage from "../pages/AdminPage";
-import SignUp from "../components/SignUp";
-import PropTypes from 'prop-types';
 import 'bootstrap';
+
 
 const Login = () => {
 
+
+    //Guardamos en los estados el email y la contraseña junto con el token que vamos a utilizar para comprobar la sesión
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     //Guardamos el token de sesión en la memoria
     const [tokenSesion, setTokenSesion] = useState();
 
-    //Si no hay token cargamos el toquen de iniciar sesión
- if (tokenSesion) {
-            return <AdminPage/>
+
+    const getToken = () => {
+        if (sessionStorage.getItem('token')) {
+            const tokenString = sessionStorage.getItem('token');
+            setTokenSesion(tokenString);
         }
+    };
+
+
+
+    //Si hay token, entendemos que se ha iniciado sesión sin cerrar y por tanto puede ir a la página de administración sin problema
+    if (tokenSesion) return <AdminPage/>
+    getToken();
+
+
+    //Nos traemos el cuerpo de la respuesta, que es el nombre del usuario y lo ponemos como valor del token que dirá si tenemos la sesión abierta o no
+    const setToken = (cuerpoRespuesta) => {
+        setTokenSesion(cuerpoRespuesta);
+        sessionStorage.setItem('token',cuerpoRespuesta);
+
+    }
+
 
     //Función para añadir un comentario
     const login = async e => {
@@ -27,29 +46,34 @@ const Login = () => {
             headers: {
                 'Content-Type': 'application/json',
             }
-        });
+        }
+        );
+        const cuerpoRespuesta = await result.json();
 
-        if (result.status === 200) setTokenSesion(result);
+        if (result.status === 200) {
+            console.log("Token:" + cuerpoRespuesta);
+           setToken(cuerpoRespuesta);
+        }
 
-    }
-
+    };
 
 
     return (
         <div id={"add-comment-form"} className={"login-wrapper"}>
             <form onSubmit={login}>
-            <h3>Login</h3>
-            <label htmlFor={email}>
-                Nombre:
-                <input id={email} type={"text"} value={email} placeholder={"Introducir email"}
-                       onChange={(event => setEmail(event.target.value))}/>
-            </label>
-            <label htmlFor={password}>
-                Contraseña:
-                <input id={password} rows={"4"} cols={"50"} value={password} type={"password"} placeholder={"Introducir contraseña"}
-                       onChange={(event => setPassword(event.target.value))}/>
-            </label>
-            <button type={"submit"}>Iniciar sesión</button>
+                <h3>Login</h3>
+                <label htmlFor={"email"}>
+                    Nombre:
+                    <input id={"email"} type={"text"} value={email} placeholder={"Introducir email"}
+                           onChange={(event => setEmail(event.target.value))}/>
+                </label>
+                <label htmlFor={"password"}>
+                    Contraseña:
+                    <input id={"password"} rows={"4"} cols={"50"} value={password} type={"password"}
+                           placeholder={"Introducir contraseña"}
+                           onChange={(event => setPassword(event.target.value))}/>
+                </label>
+                <button type={"submit"}>Iniciar sesión</button>
             </form>
         </div>
     );
