@@ -1,9 +1,11 @@
 import React, {useEffect, useState} from 'react';
 import ArticlesList from "../components/ArticlesList";
+import ArticlesListAdmin from "../components/ArticlesListAdmin";
+import NotFoundPage from "./NotFoundPage";
 
 
 
-const ArticlesListPageAdmin = () =>  {
+const ArticlesListPageAdmin = (props) =>  {
 
 //Usamos React Hooks. Definimos la información del articúlo, que va a coger la información del servidor.
 // SetArcileinfo es la información con la que vamos a poblar la info del partículo y el objeto vacío que pasamos como argumento es el valor inicial de esa articleinfo antes de cargar algún dato que cambie su estado.
@@ -31,16 +33,15 @@ const ArticlesListPageAdmin = () =>  {
     }, []);
 
 
-
-    return (
-        //<> </> Shorthand de <react.Fragment> Poner dentro el contenido </react.Fragment>==> Envolvemos las líneas de código
-        // con <> para exportarlo sin tener que usar divs. De normal para exportar varios niveles se tiene que envolver en div
-        <>
-            <h1>Entradas del blog</h1>
-            {/*Llamamos al componente que muestra la lista de artículos y le mandamos el fichero con los artículos como parémtro  */}
-            <ArticlesList articulos={todosArticulos}/>
-        </>
-    )
+        return (
+            //<> </> Shorthand de <react.Fragment> Poner dentro el contenido </react.Fragment>==> Envolvemos las líneas de código
+            // con <> para exportarlo sin tener que usar divs. De normal para exportar varios niveles se tiene que envolver en div
+            <>
+                <h1>Entradas del blog</h1>
+                {/*Llamamos al componente que muestra la lista de artículos y le mandamos el fichero con los artículos como parémtro  */}
+                <ArticlesList articulos={todosArticulos} tokenSesion={props.tokenSesion}/>
+            </>
+        )
 
 };
 

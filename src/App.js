@@ -11,6 +11,7 @@ import Login from "./components/Login";
 import 'bootstrap';
 import React, {useState, useEffect} from "react";
 import Users from "./components/Users";
+import ArticlesListPageAdmin from "./pages/ArticlesListPageAdmin";
 
 
 function App() {
@@ -53,14 +54,15 @@ function App() {
       <Route path= "/about" component={AboutPage} exact/>
       <Route
           path="/articles-list"
-          component={ArticlesListPage}
+          component={() => <ArticlesListPage tokenSesion={tokenSesion}/>}
           exact />
       {/*Usamos :name donde pasamos un parámetro en el navegador que se pasa al componente*/}
       <Route path="/articulo/:nombre" component={PaginaArticulo}  />
 {/*      Pasamos como componente la función de set token para que nos vuelva a la App el token en cuanto iniciemos sesión. De esta forma capturamos el estado de la sesión
       lo pasamos a la barra de navegación como props en el caso que no estuviera el usuario logado.    */}
          <Route path="/admin" component={() => <Login setTokenSesion={setTokenSesion}/>}/>
-         <Route path="/Users" component={() => <Users tokenSesion={tokenSesion}/>}/>
+         <Route path="/users" component={() => <Users tokenSesion={tokenSesion}/>}/>
+         <Route path="/gestionarArticulos" component={() => <ArticlesListPageAdmin tokenSesion={tokenSesion}/>}/>
       <Route component={NotFoundPage}/>
      </Switch>
       </div>

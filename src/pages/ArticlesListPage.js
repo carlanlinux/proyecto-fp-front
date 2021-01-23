@@ -3,7 +3,7 @@ import ArticlesList from "../components/ArticlesList";
 
 
 
-const ArticlesListPage = () =>  {
+const ArticlesListPage = (props) =>  {
 
 //Usamos React Hooks. Definimos la información del articúlo, que va a coger la información del servidor.
 // SetArcileinfo es la información con la que vamos a poblar la info del partículo y el objeto vacío que pasamos como argumento es el valor inicial de esa articleinfo antes de cargar algún dato que cambie su estado.
@@ -38,7 +38,7 @@ const ArticlesListPage = () =>  {
         <>
             <h1>Entradas del blog</h1>
             {/*Llamamos al componente que muestra la lista de artículos y le mandamos el fichero con los artículos como parémtro  */}
-            <ArticlesList articulos={todosArticulos}/>
+            <ArticlesList articulos={todosArticulos} tokenSesion={props.tokenSesion}/>
         </>
     )
 
