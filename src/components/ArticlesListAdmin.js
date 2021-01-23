@@ -11,7 +11,7 @@ const ArticlesListAdmin = ({articulos}) =>  {
         console.log(articulo)
         //Lllamamos a la API por post y se le dice que el cuerpo es un JSON donde se pase
         // el nombre de uusuario y el texto del comentario y se le indican las cabeceeras.
-        const result = await fetch(`/api/borrarUsuario`, {
+        const result = await fetch(`/api/borrarPost`, {
                 method: 'post',
                 body: JSON.stringify({"nombre": articulo}),
                 headers: {

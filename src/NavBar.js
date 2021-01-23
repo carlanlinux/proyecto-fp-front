@@ -19,13 +19,13 @@ const NavBar = (props) => {
                         <Link to="/articles-list">Entradas del blog</Link>
                     </li>
                     <li>
-                        <Link to="/Users">Gestión Usuarios</Link>
+                        <Link to="/users">Gestión Usuarios</Link>
                     </li>
                     <li>
-                        <Link to="/articles-list">Nuevo post</Link>
+                        <Link to="/nuevoPost">Nuevo post</Link>
                     </li>
                     <li>
-                        <Link to="/articles-list">Entradas del blog</Link>
+                        <Link to="/gestionarArticulos">Gestionar Posts</Link>
                     </li>
                     <li>
                         Bienvenid@, {props.tokenSesion}

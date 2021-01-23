@@ -9,8 +9,10 @@ import NotFoundPage from "./pages/NotFoundPage";
 import PaginaArticulo from "./pages/PaginaArticulo";
 import Login from "./components/Login";
 import 'bootstrap';
-import React, {useState, useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import Users from "./components/Users";
+import ArticlesListPageAdmin from "./pages/ArticlesListPageAdmin";
+import NuevoPost from "./components/NuevoPost";
 
 
 function App() {
@@ -27,7 +29,7 @@ function App() {
         };
         getToken();
         console.log("Usuario logado" + tokenSesion);
-    },[tokenSesion]);
+    }, [tokenSesion]);
 
     //Función para cerrar la sesión desde el session storage del navegador y poner el token de la sesión a null.
     // Esta función la pasamos a la navBar
@@ -36,37 +38,40 @@ function App() {
         setTokenSesion(null);
     };
 
-  return (
-      //Envolvemos el código dentro del router component
-      //Article:name --> Aquí recogemos el parámetro de la URL para poderlo utilizar en la página en cuestión
-      <Router>
-    <div className="App">
-      {/*Cargamos el componente de la barra de navegación encima del cuerpo de la página ya que queremos que se cargue en todas las páginas*/}
-      <NavBar tokenSesion={tokenSesion} cerrarSesion={cerrarSesion}/>
-      <div id="page-body">
+    return (
+        //Envolvemos el código dentro del router component
+        //Article:name --> Aquí recogemos el parámetro de la URL para poderlo utilizar en la página en cuestión
+        <Router>
+            <div className="App">
+                {/*Cargamos el componente de la barra de navegación encima del cuerpo de la página ya que queremos que se cargue en todas las páginas*/}
+                <NavBar tokenSesion={tokenSesion} cerrarSesion={cerrarSesion}/>
+                <div id="page-body">
 
-    {/*Usamos Switch para decirle que una vez encuentre uno de los path no siga mostrando los siguientes. Aquí es importante el orden.*/}
-     <Switch>
-       {/*Le decimos que la home debe abrir el componente de hompage usando exact le decimos que sólo queremos que cargue
+                    {/*Usamos Switch para decirle que una vez encuentre uno de los path no siga mostrando los siguientes. Aquí es importante el orden.*/}
+                    <Switch>
+                        {/*Le decimos que la home debe abrir el componente de hompage usando exact le decimos que sólo queremos que cargue
       el componente cuando sea esa ruta y si no, que no cargue nada. */}
-      <Route path = "/" component={HomePage} exact/>
-      <Route path= "/about" component={AboutPage} exact/>
-      <Route
-          path="/articles-list"
-          component={ArticlesListPage}
-          exact />
-      {/*Usamos :name donde pasamos un parámetro en el navegador que se pasa al componente*/}
-      <Route path="/articulo/:nombre" component={PaginaArticulo}  />
-{/*      Pasamos como componente la función de set token para que nos vuelva a la App el token en cuanto iniciemos sesión. De esta forma capturamos el estado de la sesión
+                        <Route path="/" component={HomePage} exact/>
+                        <Route path="/about" component={AboutPage} exact/>
+                        <Route
+                            path="/articles-list"
+                            component={() => <ArticlesListPage tokenSesion={tokenSesion}/>}
+                            exact/>
+                        {/*Usamos :name donde pasamos un parámetro en el navegador que se pasa al componente*/}
+                        <Route path="/articulo/:nombre" component={PaginaArticulo}/>
+                        {/*      Pasamos como componente la función de set token para que nos vuelva a la App el token en cuanto iniciemos sesión. De esta forma capturamos el estado de la sesión
       lo pasamos a la barra de navegación como props en el caso que no estuviera el usuario logado.    */}
-         <Route path="/admin" component={() => <Login setTokenSesion={setTokenSesion}/>}/>
-         <Route path="/Users" component={() => <Users tokenSesion={tokenSesion}/>}/>
-      <Route component={NotFoundPage}/>
-     </Switch>
-      </div>
-    </div>
-      </Router>
-  );
+                        <Route path="/admin" component={() => <Login setTokenSesion={setTokenSesion}/>}/>
+                        <Route path="/users" component={() => <Users tokenSesion={tokenSesion}/>}/>
+                        <Route path="/gestionarPost"
+                               component={() => <ArticlesListPageAdmin tokenSesion={tokenSesion}/>}/>
+                        <Route path="/nuevoPost" component={() => <NuevoPost tokenSesion={tokenSesion}/>}/>
+                        <Route component={NotFoundPage}/>
+                    </Switch>
+                </div>
+            </div>
+        </Router>
+    );
 }
 
 export default App;
