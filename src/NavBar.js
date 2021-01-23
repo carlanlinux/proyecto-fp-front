@@ -22,7 +22,7 @@ const NavBar = (props) => {
                         <Link to="/users">Gestión Usuarios</Link>
                     </li>
                     <li>
-                        <Link to="/articles-list">Nuevo post</Link>
+                        <Link to="/nuevoPost">Nuevo post</Link>
                     </li>
                     <li>
                         <Link to="/gestionarArticulos">Gestionar Posts</Link>
