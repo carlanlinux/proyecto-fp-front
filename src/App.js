@@ -66,7 +66,7 @@ function App() {
                         <Route path="/gestionarPost"
                                component={() => <ArticlesListPageAdmin tokenSesion={tokenSesion}/>}/>
                         <Route path="/nuevoPost" component={() => <NuevoPost tokenSesion={tokenSesion}/>}/>
-                        <Route component={NotFoundPage}/>
+                        <Route path={"*"} component={NotFoundPage}/>
                     </Switch>
                 </div>
             </div>

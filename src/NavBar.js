@@ -51,9 +51,9 @@ const NavBar = (props) => {
                     <li>
                         <Link to="/articles-list">Entradas del blog</Link>
                     </li>
-              {/*      <li>
-                        <Link to="/admin">Login</Link>
-                    </li>*/}
+                       <li>
+                        <Link to="/admin">AdminArea</Link>
+                    </li>
 
                 </ul>
             </nav>
