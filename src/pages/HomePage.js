@@ -10,7 +10,7 @@ const HomePage = () => {
         // con <> para exportarlo sin tener que usar divs. De normal para exportar varios niveles se tiene que envolver en div
         <div className={"container"}>
             <div className="row">
-                <div className="row col-6 align-content-center justify-content-center">
+                <div className="row col align-content-center justify-content-center">
                     <div>                    <h1>React JS</h1>
                         <img src={logoReact} width={300} height={300} alt={"Logo React"}/>
                         <h1>Encuentra todo lo que necesitas saber</h1></div>
