@@ -1,6 +1,7 @@
 /**  Basic Page CSS **/
 body {
   font-weight: 200;
+  background-color: white;
 }
 
 header a,

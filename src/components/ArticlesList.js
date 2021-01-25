@@ -7,13 +7,12 @@ const ArticlesList = ({articulos, tokenSesion, setusuarioExito}) => {
 
     const [articulo, setArticulo] = useState([]);
 
-    const borrararticulo = async (articulo) => {
-        console.log(articulo)
+    const borrararticulo = async (nombreArticulo) => {
         //Lllamamos a la API por post y se le dice que el cuerpo es un JSON donde se pase
         // el nombre de uusuario y el texto del comentario y se le indican las cabeceeras.
         const result = await fetch(`/api/borrarPost`, {
                 method: 'post',
-                body: JSON.stringify({"nombre": articulo}),
+                body: JSON.stringify({"nombre": nombreArticulo}),
                 headers: {
                     'Content-Type': 'application/json',
                 }
