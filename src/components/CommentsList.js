@@ -20,18 +20,27 @@ const CommentsList = ({nombre}) => {
                 fetchDataArticulo();
         }, );
 
+        if (articulo.comentarios === null) {
         return (
-
             <>
-                    {articulo.comentarios.map((comentario, key) => (
-                        <div className={"comment"} key={key}>
-                                <h4>{comentario.usuario}</h4>
-                                <p>{comentario.comentario}</p>
-                        </div>
-
-                    ))}
             </>
         );
+        }
+        else {
+                return (
+
+                    <>
+                            {articulo.comentarios.map((comentario, key) => (
+                                <div className={"comment"} key={key}>
+                                        <h4>{comentario.usuario}</h4>
+                                        <p>{comentario.comentario}</p>
+                                </div>
+
+                            ))}
+                    </>
+
+                )
+        }
 };
 
 export default CommentsList;

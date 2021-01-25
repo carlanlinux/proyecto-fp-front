@@ -1,9 +1,9 @@
 import React, {useEffect, useState} from 'react'
-import {FaTimes} from "react-icons/all";
+import {BiUserX, FaTimes} from "react-icons/all";
 
 //Función que recibe los comentarios como argumentos, nos recorremos con un map un array y acada posición del array la
 // pintamos con el nombre de usuario y el texto del comentario
-const UsersList = () => {
+const UsersList = (props) => {
 
         const [usuarios, setUsuarios] = useState([]);
 
@@ -24,6 +24,7 @@ const UsersList = () => {
 
                         if (result.status === 200) {
                                 console.log("Usuario " + emailUsuario + "borrado");
+                                props.setUsuarioExito("Usuario borrado correctamente")
 
                         }
 
@@ -47,25 +48,27 @@ const UsersList = () => {
         return (
 
             <>
+                <div className={"container"}>
+                    <div className={"align-content-center"}>
                     {usuarios.map((usuario, key) => (
-                        <div className="comment col media py-3" key={key}>
+                        <div className="col media py-3" key={key}>
                                 <div className="mr-3">
-                                        <button className="pet-delete btn btn-sm btn-danger"
+                                        <button className="btn btn-sm btn-danger" aria-label={"Borrar Usuario"}
                                                 onClick={() => borrarUsuario(usuario.email)}>
                                                 {/*Importamos de la libreria react icons iconos para mejorar el aspecto de la web. En este caso la X*/}
-                                                <FaTimes/>
+                                                <BiUserX/>
                                         </button>
 
                                 </div>
-                                <h4>{usuario.nombreUsuario}</h4>
-
-
-
-                                <p>
-                                        {usuario.email}</p>
+                            <div>
+                            <h4>{usuario.nombreUsuario}</h4>
+                                <p>{usuario.email}</p>
+                            </div>
                         </div>
 
                     ))}
+                    </div>
+                </div>
             </>
         );
 };

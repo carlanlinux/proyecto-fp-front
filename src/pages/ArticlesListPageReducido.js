@@ -21,7 +21,7 @@ const ArticlesListPage = (props) =>  {
         //Creamos una función para traernos los datos ya que use effect no podemos hacerla async
         const fetchData = async () => {
             //Nos traemos los datos llamando a la api y guardamos la respuesta
-            const result  = await fetch(`/api/obtenerArticulos`);
+            const result  = await fetch(`/api/obtenerArticulosReducido`);
             //Como la respuesta incluye cosas como el código de respuesta y sólo queremos el cuerpo, la guardamos en un json
             const responseBody = await result.json();
             setTodosArticulos(responseBody);
@@ -38,7 +38,7 @@ const ArticlesListPage = (props) =>  {
         // con <> para exportarlo sin tener que usar divs. De normal para exportar varios niveles se tiene que envolver en div
         <>
             <div className={"container"}>
-            <div className={"h1"}>Entradas del blog</div>
+            <div className={"h1"}>Artículos más recientes</div>
                 <p className={"success text-success"}>{usuarioExito}</p>
             <hr/>
 
