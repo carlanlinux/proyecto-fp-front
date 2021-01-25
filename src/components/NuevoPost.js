@@ -54,7 +54,7 @@ const NuevoPost = (props) => {
             <label className={"form-control-label"} htmlFor={"nombre"}>
                 Título:
             </label>
-                <input id={"nombre"} className="form-control" type={"text"} pattern="[A-Za-z0-9_-]" value={titulo}
+                <input id={"nombre"} className="form-control" type={"text"} value={titulo}
                        required onChange={(event => setTitulo(event.target.value))}/>
 
             <label className="form-control-label" htmlFor={"textoPost"}>
