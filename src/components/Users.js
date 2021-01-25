@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import UsersList from "./UsersList";
 import NotFoundPage from "../pages/NotFoundPage";
+import {FiUserPlus} from "react-icons/all";
 
 
 
@@ -12,7 +13,8 @@ const Users = (props) => {
 
 
     //Función para añadir un comentario
-    const addUsuario = async () => {
+    const addUsuario = async (e) => {
+        e.preventDefault();
         //Lllamamos a la API por post y se le dice que el cuerpo es un JSON donde se pase
         // el nombre de uusuario y el texto del comentario y se le indican las cabeceeras.
         const result = await fetch(`/api/nuevoUsuario`, {
@@ -37,28 +39,41 @@ const Users = (props) => {
     if (props.tokenSesion) {
 
     return (
-        <>
-        <form id={"add-comment-form"}>
-            <h3>Añadir un usuarioo</h3>
-            <div><span className={"success text-success"}>{usuarioExito}</span></div>
-            <label htmlFor={"nombre"}>
-                Nombre:
-                <input id={"nombre"} type={"text"} value={username} required onChange={(event => setUsername(event.target.value))}/>
-            </label>
-            <label htmlFor={email}>
-                Email:
-                <input id={"email"} type={email} value={email} required
-                          onChange={(event => setEmail(event.target.value))}/>
-            </label>
-            <label htmlFor={password}>
-                Contraseña:
-                <input id={"password"} value={password} required
-                       onChange={(event => setPassword(event.target.value))}/>
-            </label>
-            <button onClick={() => addUsuario()}>Crear usuario</button>
-        </form>
-                <UsersList/>
-            </>
+
+        <div className={"container"}>
+            <form className={"form-group"} role={"form"}>
+                <h3>Creación de usuarios</h3>
+                <hr/>
+                <div className={"form-group"}>
+                    <p className={"success text-success"}>{usuarioExito}</p>
+                    <label className={"form-control-label"} htmlFor={"nombre"}>
+                        Nombre:
+
+                    <input id={"nombre"} className={"form-control"} type={"text"} value={username} required onChange={(event => setUsername(event.target.value))}/>
+                    </label>
+                    <label className={"form-control-label"} htmlFor={"email"}>
+                        Email:
+
+                    <input type={"email"} id={"email"}
+                              className={"form-control"}
+                              value={email}
+                              required
+                            onChange={(event => setEmail(event.target.value))}/>
+                    </label>
+                <label className={"form-control-label"} htmlFor={"password"}>
+                    Contraseña:
+
+                <input id={"password"} className={"form-control"} type={"password"} value={password} required onChange={(event => setPassword(event.target.value))}/>
+                </label>
+                </div>
+                <div className={"btn btn-secondary"} onClick={addUsuario}><FiUserPlus/> Añadir Usuario</div>
+            </form>
+
+            <hr/>
+            <h3>Lista de usuarios</h3>
+            <UsersList setUsuarioExito={setUsuarioExito}/>
+        </div>
+
     );
     } else {
         return <NotFoundPage/>

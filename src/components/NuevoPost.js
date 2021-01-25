@@ -35,7 +35,7 @@ const NuevoPost = (props) => {
         const body = await result.json();
         if (result.status === 200) {
             //Se dejan en blanco nuevamente los campos del formulario y se saca mensaje de Exito
-            setUsuarioExito("Usuario dado de alta correctamente");
+            setUsuarioExito("Nuevo post subido correctamente");
             setTitulo('');
             setTexto('');
 
@@ -46,24 +46,33 @@ const NuevoPost = (props) => {
     if (props.tokenSesion) {
 
     return (
-        <>
-        <form id={"add-comment-form"} onSubmit={addPost}>
+        <div className={"container"}>
+        <form className={"form-group"} role={"form"} onSubmit={addPost}>
             <h3>Crear un nuevo post</h3>
-            <div><span className={"success text-success"}>{usuarioExito}</span></div>
-            <label htmlFor={"nombre"}>
+            <hr/>
+            <div className={"form-group"}><p className={"success text-success"}>{usuarioExito}</p>
+            <label className={"form-control-label"} htmlFor={"nombre"}>
                 Título:
-                <input id={"nombre"} type={"text"} value={titulo} required onChange={(event => setTitulo(event.target.value))}/>
             </label>
-            <label htmlFor={"textoPost"}>
+                <input id={"nombre"} className="form-control" type={"text"} pattern="[A-Za-z0-9_-]" value={titulo}
+                       required onChange={(event => setTitulo(event.target.value))}/>
+
+            <label className="form-control-label" htmlFor={"textoPost"}>
                 Texto:
-                <input id={"textoPost"} type={"textarea"} value={texto} required
-                          onChange={(event => setTexto(event.target.value))}/>
             </label>
-            <input type={"submit"} value={"Crear Post"}/>
+                <textarea id={"textoPost"}
+                       className={"form-control"}
+                       value={texto}
+                       required
+                       rows={"5"}
+                       cols={"20"}
+                       onChange={(event => setTexto(event.target.value))}/>
+            </div>
+            <input type={"submit"} className="btn btn-secondary" value={"Crear Post"}/>
 
         </form>
+        </div>
 
-            </>
     );
     } else {
         return <NotFoundPage/>

@@ -8,11 +8,10 @@ import NavBar from "./NavBar";
 import NotFoundPage from "./pages/NotFoundPage";
 import PaginaArticulo from "./pages/PaginaArticulo";
 import Login from "./components/Login";
-import 'bootstrap';
 import React, {useEffect, useState} from "react";
 import Users from "./components/Users";
-import ArticlesListPageAdmin from "./pages/ArticlesListPageAdmin";
 import NuevoPost from "./components/NuevoPost";
+import ArticlesListPageAdmin from "./pages/ArticlesListPageAdmin";
 
 
 function App() {
@@ -39,8 +38,10 @@ function App() {
     };
 
     return (
-        //Envolvemos el código dentro del router component
-        //Article:name --> Aquí recogemos el parámetro de la URL para poderlo utilizar en la página en cuestión
+        <main className="page bg-white" id="petratings">
+
+{/*        //Envolvemos el código dentro del router component
+        //Article:name --> Aquí recogemos el parámetro de la URL para poderlo utilizar en la página en cuestión*/}
         <Router>
             <div className="App">
                 {/*Cargamos el componente de la barra de navegación encima del cuerpo de la página ya que queremos que se cargue en todas las páginas*/}
@@ -71,6 +72,7 @@ function App() {
                 </div>
             </div>
         </Router>
+        </main>
     );
 }
 
